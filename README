@@ -1,0 +1,22 @@
+flashbml is partition flashing utility for Samsung BML partition system
+
+building:
+arm-linux-androideabi-gcc flashbml.c -O2 -static -oflashbml
+arm-linux-androideabi-strip flashbml
+
+running:
+adb remount
+adb push flashbml /system/bin/
+adb shell chmod 755 /system/bin/flashbml
+adb shell flashbml boot /sdcard/boot.img
+or
+adb shell flashbml recovery /sdcard/recovery.img
+or
+adb shell flashbml recoveryonly /sdcard/recovery.img
+or
+adb shell flashbml /dev/block/bml7 /sdcard/boot.img
+
+boot partition = /dev/block/bml7
+recovery partition = /dev/block/bml8
+
+MAKE SURE THAT PARTITIONS ARE THE SAME ON YOUR DEVICE!
